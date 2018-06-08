@@ -143,6 +143,11 @@ def command(opts, parser, extra_arg_groups=None):
         if opts.command:
             parser.error("argument --command: not allowed with arguments after '--'")
         command = extra_arg_groups[0] or None
+        extra_arg_groups_i = 1
+        while extra_arg_groups_i < len(extra_arg_groups):
+            command.append('--')
+            command.extend(extra_arg_groups[extra_arg_groups_i])
+            extra_arg_groups_i += 1 
 
     context = None
     request = opts.PKG
